@@ -14,7 +14,9 @@ function App() {
         <h1>Blog Dashboard</h1>
         {userData ? (
           <div>
-            <h1>Welcome back! {userData.username}</h1> <button onClick={logout}>Log out!</button>
+            <h1>Welcome back! {userData.username}</h1>
+            <button onClick={logout}>Log out!</button>
+            <Link to="/createpost">Create posts here!</Link>
           </div>
         ) : (
           <div>

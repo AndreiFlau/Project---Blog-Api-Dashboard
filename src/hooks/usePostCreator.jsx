@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-function usePostEditing() {
+function usePostCreator() {
   const [error, setError] = useState(null);
 
-  async function editPost(content, postId) {
+  async function createPost(content) {
     try {
-      const result = await fetch(`http://localhost:8080/admin/posts/${postId}`, {
-        method: "PUT",
+      const result = await fetch(`http://localhost:8080/admin/posts/`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -24,7 +24,7 @@ function usePostEditing() {
     }
   }
 
-  return { error, editPost };
+  return { error, createPost };
 }
 
-export default usePostEditing;
+export default usePostCreator;

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/App.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import usePostEditing from "../hooks/usePostEditing";
 import useFetchOnePost from "../hooks/useFetchOnePost";
 
@@ -8,30 +8,34 @@ function PostEditor() {
   const { error, editPost } = usePostEditing();
   const navigate = useNavigate();
   const { post, loading } = useFetchOnePost();
-  const [edditedPost, setEdittedPost] = useState(post);
+  const [edittedPost, setEdittedPost] = useState({
+    title: "",
+    content: "",
+    published: false,
+  });
 
   // if (error) return <div>Oops, something happened. {error.message}</div>;
 
+  useEffect(() => {
+    if (post) {
+      setEdittedPost(post);
+    }
+  }, [post]);
+
   function handleChange(e) {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setEdittedPost((prevPost) => ({
       ...prevPost,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   }
 
   async function handleEditing(e) {
     e.preventDefault();
-    try {
-      const result = await editPost(post, post.id);
-
-      if (result.success) {
-        navigate("/");
-      } else {
-        console.log(result.message);
-      }
-    } catch (error) {
-      console.log(error.message);
+    await editPost(edittedPost, post.id);
+    if (!error) {
+      alert("Post edited successfully.");
+      navigate("/");
     }
   }
 
@@ -43,15 +47,23 @@ function PostEditor() {
         <div className="post">
           <form onSubmit={handleEditing}>
             <label htmlFor="title">Title:</label>
-            <input type="title" id="title" name="title" value={post.title} onChange={handleChange} required />
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="content" name="content" value={post.content} onChange={handleChange} required />
+            <input type="title" id="title" name="title" value={edittedPost.title} onChange={handleChange} required />
+            <label htmlFor="username">Content:</label>
+            <textarea
+              type="text"
+              id="content"
+              name="content"
+              value={edittedPost.content}
+              onChange={handleChange}
+              required
+            ></textarea>
             <label htmlFor="published">Published? </label>
-            <input type="checkbox" id="published" name="published" checked={post.published} onChange={handleChange} />
+            <input type="checkbox" id="published" name="published" checked={edittedPost.published} onChange={handleChange} />
             <button type="submit">Edit Post</button>
           </form>
         </div>
       )}
+      <Link to="/">Return to homepage</Link>
     </>
   );
 }
