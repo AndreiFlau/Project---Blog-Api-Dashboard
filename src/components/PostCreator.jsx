@@ -39,7 +39,7 @@ function PostCreator() {
         <form onSubmit={handleEditing}>
           <label htmlFor="title">Title:</label>
           <input type="title" id="title" name="title" value={createdPost.title} onChange={handleChange} required />
-          <label htmlFor="username">Content:</label>
+          <label htmlFor="content">Content:</label>
           <textarea
             type="text"
             id="content"

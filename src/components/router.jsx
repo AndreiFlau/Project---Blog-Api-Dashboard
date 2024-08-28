@@ -4,6 +4,7 @@ import ErrorPage from "./ErrorPage/ErrorPage";
 import Login from "./Login";
 import PostEditor from "./PostEditor";
 import PostCreator from "./PostCreator";
+import CommentEditor from "./CommentEditor";
 
 function Routes() {
   const router = createBrowserRouter([
@@ -16,6 +17,11 @@ function Routes() {
     {
       path: "/editpost/:postId",
       element: <PostEditor />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/editcomment/:commentId",
+      element: <CommentEditor />,
       errorElement: <ErrorPage />,
     },
     {

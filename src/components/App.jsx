@@ -3,10 +3,38 @@ import useAuth from "../hooks/useAuth";
 import "../styles/App.css";
 import useFetchPosts from "../hooks/useFetchPosts";
 import formatDate from "../formatDate";
+import Comments from "./Comments";
+import useDeletePost from "../hooks/useDeletePost";
+import { useEffect, useState } from "react";
 
 function App() {
   const { userData, logout } = useAuth();
   const { posts, loading, error } = useFetchPosts();
+  const [postsState, setPostsState] = useState({
+    id: null,
+    title: "",
+    content: "",
+    date: "",
+    userId: null,
+    published: null,
+    author: "",
+  });
+  const { deletePost } = useDeletePost();
+
+  useEffect(() => {
+    if (posts) {
+      setPostsState(posts);
+    }
+  }, [posts]);
+
+  async function handleDelete(e, postId) {
+    e.preventDefault();
+    if (confirm("Are you sure you want to delete this comment?")) {
+      await deletePost(postId);
+      setPostsState((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+      alert("Post deleted successfully!");
+    }
+  }
 
   return (
     <>
@@ -33,7 +61,7 @@ function App() {
           <div className="posts">
             <h1>Posts</h1>
             <ul>
-              {posts.map((post) => (
+              {postsState.map((post) => (
                 <li key={post.id}>
                   <div>
                     <h1>Published? {post.published ? <>Yes</> : <>No</>}</h1>
@@ -48,6 +76,7 @@ function App() {
                     >
                       <button>Edit this post</button>
                     </Link>
+                    <button onClick={(e) => handleDelete(e, post.id)}>Delete this post</button>
                   </div>
                 </li>
               ))}
@@ -59,7 +88,12 @@ function App() {
           No posts available. Try <Link to="/login">logging in</Link> or <Link to="/register">creating an account</Link>
         </h1>
       )}
-      <h1>All comments</h1>
+      {userData && (
+        <div className="comments">
+          <h1>All comments</h1>
+          <Comments />
+        </div>
+      )}
       <Outlet />
     </>
   );
