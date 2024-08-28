@@ -6,6 +6,7 @@ import formatDate from "../formatDate";
 import Comments from "./Comments";
 import useDeletePost from "../hooks/useDeletePost";
 import { useEffect, useState } from "react";
+import sanitizeContent from "../sanitizeHtml";
 
 function App() {
   const { userData, logout } = useAuth();
@@ -66,7 +67,7 @@ function App() {
                   <div>
                     <h1>Published? {post.published ? <>Yes</> : <>No</>}</h1>
                     <h2>Title: {post.title}</h2>
-                    <p>Content: {post.content}</p>
+                    <div dangerouslySetInnerHTML={{ __html: sanitizeContent(post.content) }} />
                     <p>Date: {formatDate(post.date)}</p>
                     <p>By: {post.author}</p>
                     <Link

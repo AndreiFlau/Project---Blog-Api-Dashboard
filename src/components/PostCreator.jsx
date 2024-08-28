@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../styles/App.css";
 import { Link, useNavigate } from "react-router-dom";
 import usePostCreator from "../hooks/usePostCreator";
+import TinyMCEEditor from "./tinyMCEEditor";
 
 function PostCreator() {
   const { error, createPost } = usePostCreator();
@@ -22,6 +23,13 @@ function PostCreator() {
     }));
   }
 
+  function handleEditorChange(content) {
+    setCreatedPost((prevPost) => ({
+      ...prevPost,
+      content: content,
+    }));
+  }
+
   async function handleEditing(e) {
     e.preventDefault();
     await createPost(createdPost);
@@ -38,16 +46,9 @@ function PostCreator() {
       <div className="post">
         <form onSubmit={handleEditing}>
           <label htmlFor="title">Title:</label>
-          <input type="title" id="title" name="title" value={createdPost.title} onChange={handleChange} required />
+          <input type="text" id="title" name="title" value={createdPost.title} onChange={handleChange} required />
           <label htmlFor="content">Content:</label>
-          <textarea
-            type="text"
-            id="content"
-            name="content"
-            value={createdPost.content}
-            onChange={handleChange}
-            required
-          ></textarea>
+          <TinyMCEEditor value={createdPost.content} onChange={handleEditorChange} />
           <label htmlFor="published">Published? </label>
           <input type="checkbox" id="published" name="published" checked={createdPost.published} onChange={handleChange} />
           <button type="submit">Create Post</button>

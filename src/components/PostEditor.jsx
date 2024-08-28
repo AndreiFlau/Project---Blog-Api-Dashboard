@@ -3,6 +3,7 @@ import "../styles/App.css";
 import { Link, useNavigate } from "react-router-dom";
 import usePostEditing from "../hooks/usePostEditing";
 import useFetchOnePost from "../hooks/useFetchOnePost";
+import TinyMCEEditor from "./tinyMCEEditor";
 
 function PostEditor() {
   const { error, editPost } = usePostEditing();
@@ -30,6 +31,13 @@ function PostEditor() {
     }));
   }
 
+  function handleEditorChange(content) {
+    setEdittedPost((prevPost) => ({
+      ...prevPost,
+      content: content,
+    }));
+  }
+
   async function handleEditing(e) {
     e.preventDefault();
     await editPost(edittedPost, post.id);
@@ -47,16 +55,9 @@ function PostEditor() {
         <div className="post">
           <form onSubmit={handleEditing}>
             <label htmlFor="title">Title:</label>
-            <input type="title" id="title" name="title" value={edittedPost.title} onChange={handleChange} required />
+            <input type="text" id="title" name="title" value={edittedPost.title} onChange={handleChange} required />
             <label htmlFor="content">Content:</label>
-            <textarea
-              type="text"
-              id="content"
-              name="content"
-              value={edittedPost.content}
-              onChange={handleChange}
-              required
-            ></textarea>
+            <TinyMCEEditor initialValue={post.content} value={edittedPost.content} onChange={handleEditorChange} />
             <label htmlFor="published">Published? </label>
             <input type="checkbox" id="published" name="published" checked={edittedPost.published} onChange={handleChange} />
             <button type="submit">Edit Post</button>
