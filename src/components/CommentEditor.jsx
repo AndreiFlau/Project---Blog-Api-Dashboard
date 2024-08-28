@@ -31,7 +31,7 @@ function CommentEditor() {
     <>
       <h1>Edit your comment</h1>
       {error && <h1>{error.message}</h1>}
-      {!loading && (
+      {!loading ? (
         <div className="post">
           <form onSubmit={handleEditing}>
             <textarea
@@ -45,6 +45,8 @@ function CommentEditor() {
             <button type="submit">Edit Comment</button>
           </form>
         </div>
+      ) : (
+        <h1>Loading...</h1>
       )}
       <Link to="/">Return to homepage</Link>
     </>

@@ -43,7 +43,7 @@ function PostEditor() {
     <>
       <h1>Edit your post</h1>
       {error && <h1>{error.message}</h1>}
-      {!loading && (
+      {!loading ? (
         <div className="post">
           <form onSubmit={handleEditing}>
             <label htmlFor="title">Title:</label>
@@ -62,6 +62,8 @@ function PostEditor() {
             <button type="submit">Edit Post</button>
           </form>
         </div>
+      ) : (
+        <h1>Loading...</h1>
       )}
       <Link to="/">Return to homepage</Link>
     </>
