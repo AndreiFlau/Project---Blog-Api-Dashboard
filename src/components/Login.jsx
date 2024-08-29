@@ -35,8 +35,8 @@ function Login() {
   return (
     <>
       {message && <h1>{message}</h1>}
-      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
+        <h1>Login</h1>
         <label htmlFor="username">Username:</label>
         <input
           type="text"

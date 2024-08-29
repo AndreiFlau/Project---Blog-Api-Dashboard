@@ -1,8 +1,6 @@
-# React + Vite
+##Blog Dashboard
+This is the dashboard part of my blog api project.
+Check out the backend [here](https://github.com/AndreiFlau/Project---Blog-Api-Backend) and the main frontend [here](https://github.com/AndreiFlau/Project---Blog-Api-Frontend).
 
-Custom template.
-
-Just run these commands: <br>
-npm install react@18.3.1 react-dom@18.3.1 <br>
-npm install --save-dev @types/react@18.3.3 @types/react-dom@18.3.0 @vitejs/plugin-react@4.3.1 eslint@8.57.0 eslint-plugin-react@7.34.2 eslint-plugin-react-hooks@4.6.2 eslint-plugin-react-refresh@0.4.7 vite@5.3.1 <br>
-npm run dev
+##Credits
+The emoji graphics are from the open source project Twemoji. The graphics are copyright 2020 Twitter, Inc and other contributors. The graphics are licensed under CC-BY 4.0. You should review the license before usage in your project.

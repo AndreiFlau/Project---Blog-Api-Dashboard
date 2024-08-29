@@ -70,14 +70,16 @@ function App() {
                     <div dangerouslySetInnerHTML={{ __html: sanitizeContent(post.content) }} />
                     <p>Date: {formatDate(post.date)}</p>
                     <p>By: {post.author}</p>
-                    <Link
-                      to={{
-                        pathname: `/editpost/${post.id}`,
-                      }}
-                    >
-                      <button>Edit this post</button>
-                    </Link>
-                    <button onClick={(e) => handleDelete(e, post.id)}>Delete this post</button>
+                    <div className="buttons">
+                      <Link
+                        to={{
+                          pathname: `/editpost/${post.id}`,
+                        }}
+                      >
+                        <button>Edit this post</button>
+                      </Link>
+                      <button onClick={(e) => handleDelete(e, post.id)}>Delete this post</button>
+                    </div>
                   </div>
                 </li>
               ))}

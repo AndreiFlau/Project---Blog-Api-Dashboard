@@ -66,14 +66,16 @@ function Comments() {
                 <p>{comment.content}</p>
                 <p>On: {formatDate(comment.date)}</p>
                 <p>By: {comment.author}</p>
-                <Link
-                  to={{
-                    pathname: `/editcomment/${comment.id}`,
-                  }}
-                >
-                  <button>Edit this comment</button>
-                </Link>
-                <button onClick={(e) => handleDelete(e, comment.id)}>Delete this comment</button>
+                <div className="buttons">
+                  <Link
+                    to={{
+                      pathname: `/editcomment/${comment.id}`,
+                    }}
+                  >
+                    <button>Edit this comment</button>
+                  </Link>
+                  <button onClick={(e) => handleDelete(e, comment.id)}>Delete this comment</button>
+                </div>
               </li>
             ))}
           </ul>

@@ -48,7 +48,7 @@ function PostCreator() {
           <label htmlFor="title">Title:</label>
           <input type="text" id="title" name="title" value={createdPost.title} onChange={handleChange} required />
           <label htmlFor="content">Content:</label>
-          <TinyMCEEditor value={createdPost.content} onChange={handleEditorChange} />
+          <TinyMCEEditor initialValue="" value={createdPost.content} onChange={handleEditorChange} />
           <label htmlFor="published">Published? </label>
           <input type="checkbox" id="published" name="published" checked={createdPost.published} onChange={handleChange} />
           <button type="submit">Create Post</button>

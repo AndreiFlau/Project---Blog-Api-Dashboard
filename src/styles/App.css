@@ -9,6 +9,13 @@ body {
   align-items: center;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -18,6 +25,22 @@ header {
 header>div {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+}
+
+header>.login {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+header button {
+  width: 200px;
+  align-self: center;
+}
+
+header a {
+  align-self: center;
 }
 
 ul {
@@ -55,6 +78,10 @@ button {
   padding: 15px;
 }
 
+button:hover {
+  background-color: #ff4400cb;
+}
+
 a {
   color: #FF6347;
   text-decoration: none;
@@ -84,6 +111,7 @@ a:hover {
   max-width: 80vw;
   min-width: 80vw;
   margin: 20px;
+  box-shadow: 0px 0px 5px 0px #ff440163;
 }
 
 .posts ul li>div {
@@ -92,8 +120,38 @@ a:hover {
   padding: 20px;
 }
 
+.posts .buttons {
+  display: flex;
+  gap: 15px;
+}
+
 .comments {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 15px;
+}
+
+.comments ul {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.comments ul li {
+  max-width: 80vw;
+  min-width: 80vw;
+  margin: 20px;
+  box-shadow: 0px 0px 5px 0px #ff440163;
+}
+
+.comments ul li {
+  border: 1px solid #FF6F61;
+  background-color: #ffe4d9;
+  padding: 20px;
+}
+
+
+.comments .buttons {
+  display: flex;
+  gap: 15px;
 }
