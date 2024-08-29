@@ -10,7 +10,7 @@ import sanitizeContent from "../sanitizeHtml";
 
 function App() {
   const { userData, logout } = useAuth();
-  const { posts, loading, error } = useFetchPosts();
+  const { posts, loading, error } = useFetchPosts(userData);
   const [postsState, setPostsState] = useState({
     id: null,
     title: "",
@@ -86,7 +86,7 @@ function App() {
         )
       ) : (
         <h1>
-          No posts available. Try <Link to="/login">logging in</Link> or <Link to="/register">creating an account</Link>
+          No posts available. Try <Link to="/login">logging in</Link>
         </h1>
       )}
       {userData && (

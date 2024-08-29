@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 
-function useFetchPosts() {
+function useFetchPosts(userData) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!userData) {
+      setLoading(false);
+      return;
+    }
     async function fetchPosts() {
       try {
         const result = await fetch(`http://localhost:8080/api/posts/`, {
@@ -50,7 +54,7 @@ function useFetchPosts() {
     }
 
     fetchPosts();
-  }, []);
+  }, [userData]);
 
   return { posts, loading, error };
 }

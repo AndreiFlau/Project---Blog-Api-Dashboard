@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import "../styles/App.css";
 import { useNavigate } from "react-router-dom";
@@ -11,9 +11,11 @@ function Login() {
 
   // if (error) return <div>Oops, something happened. {error.message}</div>;
 
-  if (userData) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (userData) {
+      navigate("/");
+    }
+  }, [userData, navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
