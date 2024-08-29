@@ -12,6 +12,7 @@
   "dependencies": {
     "@tinymce/tinymce-react": "^5.1.1",
     "dompurify": "^3.1.6",
+    "dotenv": "^16.4.5",
     "modern-normalize": "^3.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",

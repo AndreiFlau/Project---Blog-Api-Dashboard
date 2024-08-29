@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function useFetchPosts(userData) {
   const [posts, setPosts] = useState([]);
@@ -14,7 +15,7 @@ function useFetchPosts(userData) {
     }
     async function fetchPosts() {
       try {
-        const result = await fetch(`http://localhost:8080/api/posts/`, {
+        const result = await fetch(`${API_URL}/api/posts/`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
 
@@ -26,7 +27,7 @@ function useFetchPosts(userData) {
 
         const postArray = await Promise.all(
           resJson.map(async (post) => {
-            const userResult = await fetch(`http://localhost:8080/api/users/${post.userId}`, {
+            const userResult = await fetch(`${API_URL}/api/users/${post.userId}`, {
               headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             });
 

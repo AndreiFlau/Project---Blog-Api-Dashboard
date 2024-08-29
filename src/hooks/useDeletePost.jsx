@@ -1,11 +1,12 @@
 import { useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function useDeletePost() {
   const [error, setError] = useState(null);
 
   async function deletePost(postId) {
     try {
-      const result = await fetch(`http://localhost:8080/admin/posts/${postId}`, {
+      const result = await fetch(`${API_URL}/admin/posts/${postId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

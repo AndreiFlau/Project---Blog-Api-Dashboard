@@ -1,11 +1,12 @@
 import { useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function usePostCreator() {
   const [error, setError] = useState(null);
 
   async function createPost(content) {
     try {
-      const result = await fetch(`http://localhost:8080/admin/posts/`, {
+      const result = await fetch(`${API_URL}/admin/posts/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

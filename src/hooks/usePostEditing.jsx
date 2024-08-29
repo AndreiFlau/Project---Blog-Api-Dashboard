@@ -1,11 +1,12 @@
 import { useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function usePostEditing() {
   const [error, setError] = useState(null);
 
   async function editPost(content, postId) {
     try {
-      const result = await fetch(`http://localhost:8080/admin/posts/${postId}`, {
+      const result = await fetch(`${API_URL}/admin/posts/${postId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

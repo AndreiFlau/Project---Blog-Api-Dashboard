@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function useFetchOnePost() {
   const [post, setPost] = useState("");
@@ -10,7 +11,7 @@ function useFetchOnePost() {
   useEffect(() => {
     async function FetchOnePost() {
       try {
-        const result = await fetch(`http://localhost:8080/api/posts/${postId}`, {
+        const result = await fetch(`${API_URL}/api/posts/${postId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
 
@@ -20,7 +21,7 @@ function useFetchOnePost() {
 
         const resJson = await result.json();
 
-        const userResult = await fetch(`http://localhost:8080/api/users/${resJson.userId}`, {
+        const userResult = await fetch(`${API_URL}/api/users/${resJson.userId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
 

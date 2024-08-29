@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { AdminContext } from "./AdminContext";
 import PropTypes from "prop-types";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 export function AdminProvider({ children }) {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ export function AdminProvider({ children }) {
 
   async function login(username, password) {
     try {
-      const response = await fetch("http://localhost:8080/login", {
+      const response = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

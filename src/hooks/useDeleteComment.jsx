@@ -1,11 +1,12 @@
 import { useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function useDeleteComment() {
   const [error, setError] = useState(null);
 
   async function deleteComment(commentId) {
     try {
-      const result = await fetch(`http://localhost:8080/admin/comments/${commentId}`, {
+      const result = await fetch(`${API_URL}/admin/comments/${commentId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
