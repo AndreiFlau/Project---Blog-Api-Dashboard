@@ -9,6 +9,8 @@ function useFetchPosts(userData) {
     if (!userData) {
       setLoading(false);
       return;
+    } else {
+      setLoading(true);
     }
     async function fetchPosts() {
       try {

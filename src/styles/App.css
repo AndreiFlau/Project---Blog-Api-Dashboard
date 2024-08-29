@@ -1,0 +1,99 @@
+html {
+  background-color: #FFF8F0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header>div {
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+
+p {
+  overflow-wrap: anywhere;
+}
+
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+textarea {
+  width: 300px;
+  min-height: 100px;
+  max-height: 300px;
+  resize: vertical;
+  overflow-y: auto;
+}
+
+button {
+  background-color: #FF4500;
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+a {
+  color: #FF6347;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #FF6347;
+}
+
+a:hover {
+  color: red;
+}
+
+.posts {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.posts ul {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.posts ul li:not(.comments li) {
+  max-width: 80vw;
+  min-width: 80vw;
+  margin: 20px;
+}
+
+.posts ul li>div {
+  border: 1px solid #FF6F61;
+  background-color: #ffe4d9;
+  padding: 20px;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
