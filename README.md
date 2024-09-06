@@ -7,7 +7,7 @@ Check out the backend [here](https://github.com/AndreiFlau/Project---Blog-Api-Ba
 
 ## Installation
 
-After cloning and starting the [backend server](https://github.com/AndreiFlau/Project---Blog-Api-Backend), clone this repo and run the commands below on the project's directory to run it.
+After cloning and starting the [backend server](https://github.com/AndreiFlau/Project---Blog-Api-Backend), clone this repo and run the commands below on the project's directory to use it.
 
 ```powershell
   npm install
