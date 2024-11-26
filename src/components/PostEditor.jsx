@@ -49,24 +49,30 @@ function PostEditor() {
 
   return (
     <>
-      <h1>Edit your post</h1>
-      {error && <h1>{error.message}</h1>}
-      {!loading ? (
-        <div className="post">
-          <form onSubmit={handleEditing}>
-            <label htmlFor="title">Title:</label>
-            <input type="text" id="title" name="title" value={edittedPost.title} onChange={handleChange} required />
-            <label htmlFor="content">Content:</label>
-            <TinyMCEEditor initialValue={post.content} value={edittedPost.content} onChange={handleEditorChange} />
-            <label htmlFor="published">Published? </label>
-            <input type="checkbox" id="published" name="published" checked={edittedPost.published} onChange={handleChange} />
-            <button type="submit">Edit Post</button>
-          </form>
-        </div>
-      ) : (
-        <h1>Loading...</h1>
-      )}
-      <Link to="/">Return to homepage</Link>
+      <div className="post-creator">
+        <h1>Edit your post</h1>
+        {error && <h1>{error.message}</h1>}
+        {!loading ? (
+          <div className="post">
+            <form onSubmit={handleEditing}>
+              <label htmlFor="title">Title:</label>
+              <input type="text" id="title" name="title" value={edittedPost.title} onChange={handleChange} required />
+              <label htmlFor="content">Content:</label>
+              <TinyMCEEditor initialValue={post.content} value={edittedPost.content} onChange={handleEditorChange} />
+              <div className="published">
+                <label htmlFor="published">Published? </label>
+                <input type="checkbox" id="published" name="published" checked={edittedPost.published} onChange={handleChange} />
+              </div>
+              <button type="submit">Edit Post</button>
+            </form>
+            <button type="button" className="link-btn">
+              <Link to="/">Return to homepage</Link>
+            </button>
+          </div>
+        ) : (
+          <h1>Loading...</h1>
+        )}
+      </div>
     </>
   );
 }

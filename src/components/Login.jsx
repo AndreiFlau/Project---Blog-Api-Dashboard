@@ -32,31 +32,52 @@ function Login() {
     }
   }
 
+  async function handleDemoLogin(e) {
+    e.preventDefault();
+    try {
+      const result = await login("author", "123");
+      if (result.success) {
+        navigate("/");
+      } else {
+        console.log(result.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <>
-      {message && <h1>{message}</h1>}
-      <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Log in</button>
-      </form>
+      <div className="login">
+        {message && <h1>{message}</h1>}
+        <form onSubmit={handleSubmit}>
+          <h1>Login</h1>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <div className="buttons">
+            <button type="submit">Log in</button>
+            <button type="button" onClick={handleDemoLogin}>
+              Access Demo Account
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

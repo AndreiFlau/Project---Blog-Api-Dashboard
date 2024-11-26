@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import "../styles/App.css";
 import useFetchPosts from "../hooks/useFetchPosts";
@@ -11,6 +11,7 @@ import sanitizeContent from "../sanitizeHtml";
 function App() {
   const { userData, logout } = useAuth();
   const { posts, loading, error } = useFetchPosts(userData);
+  const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
   const [postsState, setPostsState] = useState({
     id: null,
     title: "",
@@ -21,12 +22,18 @@ function App() {
     author: "",
   });
   const { deletePost } = useDeletePost();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!userData) {
+      navigate("/login");
+    }
+  }, [userData, navigate]);
 
   useEffect(() => {
-    if (posts) {
-      setPostsState(posts);
+    if (sortedPosts) {
+      setPostsState(sortedPosts);
     }
-  }, [posts]);
+  }, [sortedPosts]);
 
   async function handleDelete(e, postId) {
     e.preventDefault();
@@ -43,9 +50,7 @@ function App() {
         <h1>Blog Dashboard</h1>
         {userData ? (
           <div>
-            <h1>Welcome back! {userData.username}</h1>
             <button onClick={logout}>Log out!</button>
-            <Link to="/createpost">Create posts here!</Link>
           </div>
         ) : (
           <div>
@@ -84,12 +89,13 @@ function App() {
                 </li>
               ))}
             </ul>
+            <button className="create-post">
+              <Link to="/createpost">Create posts here!</Link>
+            </button>
           </div>
         )
       ) : (
-        <h1>
-          No posts available. Try <Link to="/login">logging in</Link>
-        </h1>
+        <></>
       )}
       {userData && (
         <div className="comments">
